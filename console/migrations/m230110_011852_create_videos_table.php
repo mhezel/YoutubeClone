@@ -32,14 +32,14 @@ class m230110_011852_create_videos_table extends Migration
 
         // creates index for column `created_by`
         $this->createIndex(
-            '{{%idx-videos-created_by}}',
+            '{{%idx-video-created_by}}',
             '{{%video}}',
             'created_by'
         );
 
         // add foreign key for table `{{%user}}`
         $this->addForeignKey(
-            '{{%fk-videos-created_by}}',
+            '{{%fk-video-created_by}}',
             '{{%video}}',
             'created_by',
             '{{%user}}',
@@ -55,13 +55,13 @@ class m230110_011852_create_videos_table extends Migration
     {
         // drops foreign key for table `{{%user}}`
         $this->dropForeignKey(
-            '{{%fk-videos-created_by}}',
+            '{{%fk-video-created_by}}',
             '{{%video}}'
         );
 
         // drops index for column `created_by`
         $this->dropIndex(
-            '{{%idx-videos-created_by}}',
+            '{{%idx-video-created_by}}',
             '{{%video}}'
         );
 

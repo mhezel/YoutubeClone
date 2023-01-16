@@ -6,8 +6,8 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
-/** @var yii\web\View $this */
 /** @var yii\data\ActiveDataProvider $dataProvider */
+/** @var yii\web\View $this */
 
 $this->title = 'Videos';
 $this->params['breadcrumbs'][] = $this->title;
