@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
-                    'attribute'=>'video_id',
+                    'attribute'=>'title',
                     'content'=>function($model){
                         return $this->render('_video_in',['model'=>$model]);
                     }
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => ActionColumn::className(),
                 'contentOptions' => [
-                     'style'=>'width: 100px;text-align:center'
+                     'style'=>'width: 100px;text-align:center',
                 ],
                 'urlCreator' => function ($action, Video $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->video_id]);

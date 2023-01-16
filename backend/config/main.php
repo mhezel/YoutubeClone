@@ -10,7 +10,6 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'name' => 'Youtube Clone',
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
