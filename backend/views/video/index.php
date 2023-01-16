@@ -20,20 +20,27 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Video', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'video_id',
-            'title',
-            'tags',
-            'description',
-            'status',
+            [
+                    'attribute'=>'video_id',
+                    'content'=>function($model){
+                        return $this->render('_video_in',['model'=>$model]);
+                    }
+            ],
+
+            [
+                    'attribute'=>'status',
+                    'content'=>function($model){
+                        return $model->getStatusLabels()[$model->status];
+                    }
+            ],
             //'has_thumbnail',
             //'video_name',
-            //'created_at',
-            //'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
             //'created_by',
             [
                 'class' => ActionColumn::className(),
@@ -46,6 +53,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
-
-
 </div>

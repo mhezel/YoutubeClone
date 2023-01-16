@@ -6,6 +6,7 @@ use yii\bootstrap4\ActiveForm;
 /** @var yii\web\View $this */
 /** @var common\models\Video $model */
 /** @var yii\bootstrap4\ActiveForm $form */
+\backend\assets\TagsInputAsset::register($this)
 ?>
 
 <div class="video-form">
@@ -15,7 +16,7 @@ use yii\bootstrap4\ActiveForm;
     ]); ?>
 
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-8 col-xs-12">
             <?php echo $form->errorSummary($model) ?>
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
@@ -28,13 +29,15 @@ use yii\bootstrap4\ActiveForm;
                     <label class="custom-file-label" for="thumbnail">Choose file</label>
                 </div>
             </div>
-            <?= $form->field($model, 'tags')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'tags',[
+                    'inputOptions' => ['data-role' => 'tagsinput']
+            ])->textInput(['maxlength' => true]) ?>
         </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 col-xs-12">
                     <div class="embed-responsive embed-responsive-16by9 mb-3">
                         <video class="embed-responsive-item"
-                               poster="<?php echo $model->getThumbnailLink()?>"
-                               src="<?php echo $model->getVideoLink() ?>"
+                               poster="<?= $model->getThumbnailLink()?>"
+                               src="<?= $model->getVideoLink() ?>"
                                controls></video>
                     </div>
                             <div class="mb-3">

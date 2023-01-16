@@ -25,9 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php $form = \yii\bootstrap4\ActiveForm::begin([
             'options' => ['enctype' => 'multipart/form-data']
         ]) ?>
-
         <?php echo $form->errorSummary($model) ?>
-
         <button class="btn btn-primary btn-file">
             Select File
             <input type="file" id="videoFile" name="video">
