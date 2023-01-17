@@ -1,7 +1,6 @@
 <?php
 
 namespace common\models;
-
 use Imagine\Image\Box;
 use Yii;
 use yii\behaviors\BlameableBehavior;
@@ -113,6 +112,14 @@ class Video extends \yii\db\ActiveRecord
     public function getCreatedBy()
     {
         return $this->hasOne(User::class, ['id' => 'created_by']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getViews()
+    {
+        return $this->hasMany(VideoView::class, ['video_id' => 'video_id']);
     }
 
     /**
