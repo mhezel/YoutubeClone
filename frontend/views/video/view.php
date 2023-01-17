@@ -27,6 +27,10 @@ $this->title = $model->title . ' | ' . Yii::$app->name;
                 <?php \yii\widgets\Pjax::end() ?>
             </div>
         </div>
+        <div>
+            <p><?php echo $model->createdBy->username ?></p>
+            <?php echo yii\helpers\Html::encode($model->description)?>
+        </div>
     </div>
 </div>
 
