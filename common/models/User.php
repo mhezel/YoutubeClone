@@ -60,6 +60,16 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     * @throws \yii\base\InvalidConfigException
+     * {@inheritdoc}
+     */
+    public function getSubscribers()
+    {
+        return $this->hasMany(User::class, ['id' => 'user_id'])->viaTable('subscriber', ['channel_id' => 'id']);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function findIdentity($id)
@@ -209,5 +219,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public function isSubscribed($userId)
+    {
+        return Subscriber::find()->andWhere([
+            'channel_id' => $this->id,
+            'user_id' => $userId
+        ])->one();
     }
 }
