@@ -28,8 +28,7 @@ $this->title = $model->title . ' | ' . Yii::$app->name;
             </div>
         </div>
         <div>
-            <p><?php echo Html::a($model->createdBy->username, [
-                   'channel/view', 'username' => $model->createdBy->username])?></p>
+            <p><?php echo \common\helpers\Html::channelLink($model->createdBy) ?></p>
             <?php echo Html::encode($model->description)?>
         </div>
     </div>

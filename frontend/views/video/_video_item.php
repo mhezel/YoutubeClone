@@ -14,8 +14,11 @@ use yii\helpers\Html;
         </div>
     </a>
     <div class="card-bod p-2">
-        <h6 class="card-title m-0"><?php echo $model->title ?></h6>
-        <p class="text-muted card-text m-0"><?php echo $model->createdBy->username ?></p>
-        <p class="text-muted card-text m-0"><?php echo $model->getViews()->count()?> views •<?php echo Yii::$app->formatter->asRelativeTime($model->created_at) ?></p>
+        <h6 class="card-title m-0">
+            <?php echo $model->title ?></h6>
+        <p class="text-muted card-text m-0">
+            <?php echo \common\helpers\Html::channelLink($model->createdBy)?>
+        <p class="text-muted card-text m-0">
+            <?php echo $model->getViews()->count()?> views •<?php echo Yii::$app->formatter->asRelativeTime($model->created_at) ?></p>
     </div>
 </div>
