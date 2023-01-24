@@ -4,6 +4,7 @@ use yii\helpers\Url;
 
 /** @var $this \yii\web\View */
 /** @var $model \common\models\Video */
+/** @var $similarVideos \common\models\Video[] */
 
 $this->title = $model->title . ' | ' . Yii::$app->name;
 ?>
@@ -31,6 +32,32 @@ $this->title = $model->title . ' | ' . Yii::$app->name;
             <p><?php echo \common\helpers\Html::channelLink($model->createdBy) ?></p>
             <?php echo Html::encode($model->description)?>
         </div>
+    </div>
+    <div class="col-sm-4">
+    <?php foreach ($similarVideos as $similarVideo): ?>
+        <div class="media">
+            <a href="<?php echo Url::to(['/video/view', 'id'=> $similarVideo->video_id]) ?>">
+                <div class="embed-responsive embed-responsive-16by9 mr-2" style="width: 200px;">
+                    <video class="embed-responsive-item"
+                        poster="<?php echo $similarVideo->getThumbnailLink() ?>"
+                        src="<?php echo $similarVideo->getVideoLink()?>">
+                    </video>
+                </div>
+            </a>
+  <div class="media-body">
+    <h6 class="m-0"><?php echo $similarVideo->title?> </h6>
+    <div class="text-muted">
+        <p class="m-0">
+            <?php echo \common\helpers\Html::channelLink($similarVideo->createdBy) ?>
+        </p>
+        <small>
+            <?php echo $model->getViews()->count() ?> views •
+            <?php echo Yii::$app->formatter->asRelativeTime($similarVideo->created_at) ?>
+        </small>
+    </div>
+  </div>
+</div>
+            <?php endforeach; ?>
     </div>
 </div>
 
