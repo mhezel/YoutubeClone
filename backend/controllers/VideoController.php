@@ -47,7 +47,9 @@ class VideoController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Video::find()->creator(Yii::$app->user->id)
+            'query' => Video::find()
+                    ->creator(Yii::$app->user->id)
+                    ->latest(),
             /*
             'pagination' => [
                 'pageSize' => 50
@@ -64,20 +66,6 @@ class VideoController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
-    /**
-     * Displays a single Video model.
-     * @param string $video_id Video ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
     /**
      * Creates a new Video model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -103,11 +91,14 @@ class VideoController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id){
+
         $model = $this->findModel($id);
 
         $model->thumbnail = UploadedFile::getInstanceByName('thumbnail');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->video_id]);
+            return $this->redirect([
+                'update', 'id' => $model->video_id
+            ]);
         }
 
         return $this->render('update', [
@@ -125,7 +116,6 @@ class VideoController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 

@@ -1,0 +1,12 @@
+<?php
+
+use common\models\Video;
+use yii\helpers\Html;
+use yii\helpers\Url;
+
+/** @var yii\web\View $this */?>
+
+<h1>My History</h1>
+<?php echo
+    $this->render('_list',['dataProvider'=>$dataProvider]);
+?>

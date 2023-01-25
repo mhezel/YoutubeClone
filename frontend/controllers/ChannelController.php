@@ -20,7 +20,7 @@ class ChannelController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only'  => ['subscribe'],
+                'only' => ['subscribe'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -41,7 +41,7 @@ class ChannelController extends Controller
         return $this->render('view', [
             'channel' => $channel,
             'dataProvider' => $dataProvider
-            ]);
+        ]);
     }
     /**
      * @param $username
@@ -56,14 +56,15 @@ class ChannelController extends Controller
         return $channel;
     }
 
-    public function actionSubscribe($username){
+    public function actionSubscribe($username)
+    {
 
         $channel = $this->findChannel($username);
 
         $userId = \Yii::$app->user->id;
         $subscriber = $channel->isSubscribed($userId);
 
-        if (!$subscriber){
+        if (!$subscriber) {
             $subscriber = new Subscriber();
             $subscriber->channel_id = $channel->id;
             $subscriber->user_id = $userId;
@@ -71,17 +72,17 @@ class ChannelController extends Controller
             $subscriber->save();
 
             /*\Yii::$app->mailer->compose([
-                'html' => 'subscriber-html', 'text' => 'subscriber-text'
+            'html' => 'subscriber-html', 'text' => 'subscriber-text'
             ], [
-                'channel' => $channel,
-                'user' => \Yii::$app->user->identity
+            'channel' => $channel,
+            'user' => \Yii::$app->user->identity
             ])
-                ->setFrom(\Yii::$app->params['senderEmail'])
-                ->setTo($channel->email)
-                ->setSubject('You have new subscriber')
-                ->send();*/
+            ->setFrom(\Yii::$app->params['senderEmail'])
+            ->setTo($channel->email)
+            ->setSubject('You have new subscriber')
+            ->send();*/
 
-        }else{
+        } else {
             $subscriber->delete();
         }
         return $this->renderAjax('_subscribe', [

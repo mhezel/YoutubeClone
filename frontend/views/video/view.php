@@ -35,7 +35,7 @@ $this->title = $model->title . ' | ' . Yii::$app->name;
     </div>
     <div class="col-sm-4">
     <?php foreach ($similarVideos as $similarVideo): ?>
-        <div class="media">
+        <div class="media mb-2">
             <a href="<?php echo Url::to(['/video/view', 'id'=> $similarVideo->video_id]) ?>">
                 <div class="embed-responsive embed-responsive-16by9 mr-2" style="width: 200px;">
                     <video class="embed-responsive-item"
